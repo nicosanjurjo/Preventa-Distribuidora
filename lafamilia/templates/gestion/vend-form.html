@@ -1,0 +1,14 @@
+{% extends 'gestion/index.html' %}
+{% load static %}
+
+{% block css %} <link rel="stylesheet" type="text/css" href={% static "css/form.css" %} /> {% endblock %}
+
+
+{% block content %}
+  <h2>Alta o modificacion de vendedor</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+  </form>
+{% endblock %}

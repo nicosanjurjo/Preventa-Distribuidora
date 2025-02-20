@@ -1,0 +1,49 @@
+{% extends "gestion/index.html" %}
+
+{% load static %}
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<h2>CLIENTES | Distribuidora La Familia</h2>
+<HR></HR>
+
+<div id="contenedor">
+    <a class="btn btn-primary alta" href="{% url 'Cli-Add' %}" role="button">Alta de cliente</a>
+    <table id="myTable" class="display">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Zona</th>
+            <th>Nombre</th>
+            <th>Direccion</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente.pk }}</td>
+                <td>{{ cliente.zona }}</td>
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.direccion }}</td>
+                <td>{{ cliente.telefono }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'Cli-Edit' cliente.pk %}">Editar</a>
+                    |
+                    <a class="btn btn-danger" href="{% url 'Cli-Delete' cliente.pk %}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+.superior {
+    display: flex;
+    justify-content:space-around;
+    margin-bottom: 15px;
+}
+
+.busqueda button[type="submit"] {
+    width: 74%;
+    margin-top: 10px;
+}
+
+.btn-group-scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.btn-group-scroll .btn {
+    display: inline-block;
+    white-space: normal;
+}
+
+#pedido-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+#pedido-table th {
+    background: #f8f8f8;
+}
+
+#pedido-table td {
+    border-top: 1px solid #e9ecef;
+}
+
+#pedido-table .cantidad-input {
+    width: 40px;
+}
+
+.superior .btn {
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    line-height: 1.5;
+}
+
+.superior .btn.alta {
+    margin-right: 10px;
+}
+
+.anular {
+    margin-left: 4px;
+}
+
+.anulado {
+    background-color: #ff5765 !important;
+    color: #000000 !important;
+}

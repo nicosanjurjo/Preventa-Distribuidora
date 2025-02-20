@@ -1,0 +1,50 @@
+{% extends "gestion/index.html" %}
+
+{% load static %}
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+<h2>PRODUCTOS | Distribuidora La Familia</h2>
+<HR></HR>
+
+<div id="contenedor">
+    <a class="btn btn-primary alta" href="{% url 'Prod-Add' %}" role="button">Nuevo producto</a>
+    <table id="myTable" class="display">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Marca</th>
+            <th>Precio</th>
+            <th>Codigo</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.marca }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{ producto.codigo }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'Prod-Edit' producto.pk %}">Editar</a>
+                    |
+                    <a class="btn btn-danger" href="{% url 'Prod-Delete' producto.pk %}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+
+{% endblock %}

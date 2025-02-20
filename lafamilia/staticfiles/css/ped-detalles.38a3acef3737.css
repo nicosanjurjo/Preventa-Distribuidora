@@ -1,0 +1,76 @@
+/* Estilo general para la página de detalles del pedido */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    position: relative;
+}
+
+/* Título principal */
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Sección de información del pedido */
+p {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Encabezados de sección */
+h2, h3 {
+    color: #444;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Lista de productos */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Total del pedido */
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    margin-top: 20px;
+}
+
+body {
+    position: relative;
+}
+
+.watermark {
+    position: fixed;
+    z-index: -1; /* Asegúrate de que la imagen esté detrás del contenido */
+    width: 60%; /* Ajusta el tamaño según sea necesario */
+    height: 102%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centra la imagen */
+    opacity: 0.15; /* Haces que la imagen se vea como una marca de agua */
+    pointer-events: none; /* Asegúrate de que la imagen no interfiera con el contenido interactivo */
+}
+
+@media print {
+    .pedido {
+        page-break-after: always; /* Hace que cada pedido se imprima en una nueva página */
+    }
+}

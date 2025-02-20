@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Pedido</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href={% static "css/ped-detalles.css" %} />
+</head>
+<body>
+    <h4 style="text-align:center">Distribuidora La Familia - 2657 635398</h4>
+    <hr>
+    <H2 style="border-bottom:none; margin-bottom:5px; margin-top:25px">Detalles del Pedido #{{ pedido.id }}</H2>    
+    <p><strong>Cliente:</strong> {{ pedido.cliente.nombre }}</p>
+    <p><strong>Direccion:</strong> {{ pedido.cliente.direccion }}</p>
+    <p><strong>Dia de reparto:</strong> {{ pedido.diareparto }}</p>
+    <p><strong>Vendedor:</strong> {{ pedido.vendedor.nombre }}</p>
+    <p><strong>Fecha:</strong> {{ pedido.fecha }}</p>
+    {% if pedido.modificado and not pedido.anulado %}
+    <p style="margin-bottom:14px; margin-top: 12px"><strong>Se agregaron productos el {{ pedido.fecha_modificacion }}</strong></p>
+    {% endif %}
+    <div style="padding: 10px">PRODUCTOS:
+    <ul style="margin-bottom:28px; margin-top: 10px">
+        {% for item in pedido.pedidoproducto_set.all %}
+            <li>{{ item.producto.nombre }} - {{ item.producto.marca }} | Precio unitario: ${{ item.precio_unitario }} - Cantidad: {{ item.cantidad }} </li>
+        {% endfor %}
+    </ul></div>
+    {% if pedido.observaciones %}
+    <p>OBSERVACIONES: {{ pedido.observaciones }}</p>
+    {% endif %}
+    <h3>
+        {% if pedido.anulado %}
+        <s>Total del pedido: ${{ pedido.total }}</s> <span style=" margin-left: 5px">PEDIDO <span style="color: red"> ANULADO </span> EL {{ pedido.fecha_modificacion|date:" d/m/y H:i" }} </span>
+        {% else %}
+            Total del pedido: ${{ pedido.total }}
+        {% endif %}
+    </h3>
+
+    <img src={% static "img/lafam1.png" %} alt="Distribuidora La Familia" class="watermark">
+    
+</body>
+</html>

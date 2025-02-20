@@ -1,0 +1,125 @@
+{% extends 'gestion/index.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href={% static "css/ped.css" %} />{% endblock %}
+{% block content %}
+
+<div id="contenedor">
+    <div class="superior">
+        <a class="btn btn-primary alta" href="{% url 'Ped-Form-Ges' %}" role="button">Crear pedido especial</a>
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#filtroModal">Búsqueda avanzada</button>
+    </div>
+
+    <table id="myTable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Pedido #</th>
+                <th>Cliente</th>
+                <th>Vendedor</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+            <tr class="{% if pedido.anulado %}anulado{% endif %}">
+                <td>{{ pedido.id }}</td>
+                <td>{{ pedido.cliente.nombre }}</td>
+                <td>{{ pedido.vendedor.nombre }}</td>
+                <td>{{ pedido.fecha|date:"d/m/y H:i" }}</td>
+                <td>${{ pedido.total }}</td>
+                <td>
+                    <a href="{% url 'ver_pedido' pedido.id %}" class="btn btn-info">Ver</a>
+                    {% if pedido.anulado %}
+                    <a style="margin-left: 25px;"><strong>ANULADO</strong></a>
+                    {% endif %}
+                    {% if not pedido.anulado %}
+                    <a href="{% url 'agregar_productos_form' pedido.id %}" class="btn btn-warning">Editar</a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#anularModal" 
+                        data-pedido-id="{{ pedido.id }}" 
+                        data-cliente-nombre="{{ pedido.cliente.nombre }}" 
+                        data-pedido-fecha="{{ pedido.fecha|date:'d/m/y H:i' }}">Anular</button>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal para la búsqueda de pedidos -->
+<div class="modal fade" id="filtroModal" tabindex="-1" aria-labelledby="filtroModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filtroModalLabel">Búsqueda avanzada</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="filtroForm" method="GET">
+                    <label for="vendedor">Vendedor:</label>
+                    <select id="vendedor" name="vendedor">
+                        <option value="">Todos los vendedores</option>
+                        {% for vendedor in vendedores %}
+                            <option value="{{ vendedor.id }}">{{ vendedor.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                    <br><br>
+                    <label for="cliente">Cliente:</label>
+                    <select id="cliente" name="cliente">
+                        <option value="">Todos los clientes</option>
+                        {% for cliente in clientes %}
+                            <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                    <br><br>
+                    <!-- Select para los días de reparto -->
+                    <label for="diareparto">Día de reparto:</label>
+                    <select id="diareparto" name="diareparto">
+                        <option value="">Todos los días de reparto</option>
+                        <option value="Lunes">Lunes</option>
+                        <option value="Miércoles">Miércoles</option>
+                        <option value="Viernes">Viernes</option>
+                        <option value="Sábado">Sábado</option>
+                    </select>
+                    <br><br>
+                    <p><label for="fecha-inicio">Desde:</label>
+                    <input type="date" id="fecha-inicio" name="fecha_inicio" required></p>
+            
+                    <p><label for="fecha-fin">Hasta:</label>
+                    <input type="date" id="fecha-fin" name="fecha_fin"></p>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button class="btn btn-primary" id="remitos" data-url="{% url 'PedidosPorFecha' %}">Generar remitos</button>
+                        <button class="btn btn-info" id="liquidacion" data-url="{% url 'PedidosLiquidacion' %}">Generar liquidación</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de confirmación de anulación -->
+<div class="modal fade" id="anularModal" tabindex="-1" aria-labelledby="anularModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="anularModalLabel">Confirmar anulación de pedido</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="anularModalText"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <a href="#" id="confirmarAnulacionBtn" class="btn btn-danger">Anular pedido</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extrajs %}<script type="text/javascript" src={% static "js/ped.js" %}></script>{% endblock %}

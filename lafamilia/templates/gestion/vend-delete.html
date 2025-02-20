@@ -1,0 +1,10 @@
+{% extends "gestion/index.html" %}
+{% block content %}
+<h1>Confirmar eliminación</h1>
+<p>¿Estás seguro de que deseas eliminar al vendedor "{{ object.nombre }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="{% url 'Productos' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "gestion/index.html" %}
+
+{% load static %}
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+<h2>VENDEDORES | Distribuidora La Familia</h2>
+<HR></HR>
+
+<div id="contenedor">
+    <a class="btn btn-primary alta" href="{% url 'Vend-Add' %}" role="button">Alta de vendedor</a>
+    <table id="myTable" class="display">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>DNI</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for vendedor in vendedores %}
+            <tr>
+                <td>{{ vendedor.pk }}</td>
+                <td>{{ vendedor.nombre }}</td>
+                <td>{{ vendedor.dni }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'Vend-Edit' vendedor.pk %}">Editar</a>
+                    |
+                    <a class="btn btn-danger" href="{% url 'Vend-Delete' vendedor.pk %}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+
+{% endblock %}

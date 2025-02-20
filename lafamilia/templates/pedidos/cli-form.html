@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href={% static "css/form.css" %} />
+  <title>Alta cliente | Preventa</title>
+      <style>
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #333; /* Color de fondo del footer */
+        color: white; /* Color del texto */
+        padding: 2px; /* Espaciado del footer */
+        text-align: center; /* Centrar el texto */
+        font-size: 14px; /* Tamaño de la fuente */
+      }
+    
+      .footer p {
+        margin-top: 0px; /* Eliminar margen del párrafo */
+      }
+    </style>
+</head>
+<body>
+  <h2>Alta de cliente</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+  </form>
+<footer class="footer">
+  <div class="container text-center">
+      <p>Desarrollado por Nicolas Sanjurjo - Desarrollo Criollo &copy; 2024 para La Familia</p>
+  </div>
+</footer>
+</body>
+</html>
+
+
+
+
+
+

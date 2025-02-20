@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.navbar {
+    background-color: #fff;
+    height: 50px;
+    margin: 5px;
+    border-radius: 16px;
+    padding: 0.5rem;
+}
+
+.navbar-toggler {
+    border: none;
+    font-size: 1.25rem;
+}
+
+.nav-link {
+    color: #666777;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 2px;
+    background-color: #f4b404;
+    visibility: hidden;
+    transition: 0.3s ease-in-out;
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+    width: 100%;
+    visibility: visible;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+}
+
+
+body {
+    position: relative;
+    background-color:  #bb8e2d ;
+    margin: 5px;
+    min-height: 100vh;
+}
+
+footer {
+    padding-bottom: 14px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #f4b404;
+    text-align: center;
+
+}
+
+h2 {
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.alta {
+    margin-bottom: 15px;
+}
+
+#contenedor {
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    padding: 10px;
+    margin-bottom: 80px;
+}
+
+#contenedor_formulario {
+    margin-top: 80px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+#myTable {
+    width: 100%;
+    max-width: 100%;
+    table-layout: auto;
+}
+
+#myTable th,
+#myTable td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .footer p {
+    margin-top: 0px;
+  }
+
+@media (max-width: 768px) {
+    #myTable {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    #myTable th {
+        background: #f8f8f8;
+    }
+
+    #myTable td {
+        border-top: 1px solid #e9ecef;
+    }
+
+    .on-off {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .on-off button {
+        margin-bottom: 10px;
+    }
+}
